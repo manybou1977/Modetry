@@ -32,6 +32,9 @@
                 <a href="{{ path('app_modification', {'id': produit.id }) }}">
 			<button type="submit" class="btn btn-primary"><i class="fa fa-pen" aria-hidden="true"></i></button>
 		        </a>
+             <a href="{{ path('app_produits_supprime', {'id': produit.id }) }}?token={{ csrf_token('suppression') }}">
+			<button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+		        </a>    
         {% endif %}  
         {% endfor %}
         

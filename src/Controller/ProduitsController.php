@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class ProduitsController extends AbstractController
 {
@@ -102,4 +103,19 @@ class ProduitsController extends AbstractController
 
         ]);
     } 
+    #[route('/produits/supprime/{id}', name: 'app_produits_supprime')]
+    public function suppressionProduits(int $id, Request $request): Response
+    {
+        if ($this->isCsrfTokenValid('suppression',$request->query->get('token',''))){
+            if($id){
+                $produit = $this->manager->getRepository(Produits::class)->find($id);
+                $this->manager->remove($produit);
+                $this->manager->flush();
+            }
+            return $this->redirectToRoute('app_produits');
+        }else {
+            throw new BadRequestException('token csrf invalid');
+        }
+    }
+
 }

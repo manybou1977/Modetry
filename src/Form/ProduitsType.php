@@ -35,8 +35,9 @@ class ProduitsType extends AbstractType
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',
+                            'image/webp',
                         ],
-                        'mimeTypesMessage' => 'image en format .jpg ou .png uniquement',
+                        'mimeTypesMessage' => 'image en format .jpg , .webp ou .png uniquement',
                     ])
                 ],
             ])
