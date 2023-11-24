@@ -25,17 +25,18 @@
                             <p>Pas disponible</p>
                             {% endif %}
                         </div>
+                        {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('app_modification', {'id': produit.id }) }}">
+			<button type="submit" class="btn btn-primary mt-2"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>
+		        </a>
+             <a href="{{ path('app_produits_supprime', {'id': produit.id }) }}?token={{ csrf_token('suppression') }}">
+			<button type="submit" class="btn btn-danger mt-2"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
+		        </a>    
+        {% endif %}  
                     </div>
                 </div>
             </div>
-            {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('app_modification', {'id': produit.id }) }}">
-			<button type="submit" class="btn btn-primary"><i class="fa fa-pen" aria-hidden="true"></i></button>
-		        </a>
-             <a href="{{ path('app_produits_supprime', {'id': produit.id }) }}?token={{ csrf_token('suppression') }}">
-			<button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
-		        </a>    
-        {% endif %}  
+            
         {% endfor %}
         
     </div>
