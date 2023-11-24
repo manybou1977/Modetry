@@ -1,20 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Acceuil!
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 1000px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-{# {{dump(app.user.pseudo)}} #}
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/manybou/Desktop/ModeFyt/ModeTry/ModeTry/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/manybou/Desktop/ModeFyt/ModeTry/ModeTry/Templates/home/index.html.twig'|file_link(0) }}">Templates/home/index.html.twig</a></code></li>
-    </ul>
+	<div class="example-wrapper">
+		<h1>ModeTry 'Vos vêtement, Votre silouhette, Votre style'
+			{{ controller_name }}
+		</h1>
+		{# {{dump(app.user.pseudo)}} 
+		    This friendly message is coming from:
+		    <ul>
+		       {# <li>Your controller at <code><a href="{{ '/Users/manybou/Desktop/ModeFyt/ModeTry/ModeTry/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
+		        <li>Your template at <code><a href="{{ '/Users/manybou/Desktop/ModeFyt/ModeTry/ModeTry/Templates/home/index.html.twig'|file_link(0) }}">Templates/home/index.html.twig</a></code></li>#}
+	</ul>
 </div>
-{% endblock %}
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<img src="{{ asset('assets/img/photos/page.webp') }}" class="page">
+		</div>
+		<div class="col">
+			<img src="{{ asset('assets/img/photos/men.webp') }}" class="men">
+		</div>
+		<div class="col mt-5">
+			<img src="{{ asset('assets/img/photos/jean.jpg') }}" class="jean">
+		</div>
+	</div>
+</div>{% endblock %}
