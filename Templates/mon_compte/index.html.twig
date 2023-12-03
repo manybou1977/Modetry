@@ -9,12 +9,35 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/manybou/Desktop/ModeFyt/ModeTry/ModeTry/src/Controller/MonCompteController.php'|file_link(0) }}">src/Controller/MonCompteController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/manybou/Desktop/ModeFyt/ModeTry/ModeTry/Templates/mon_compte/index.html.twig'|file_link(0) }}">Templates/mon_compte/index.html.twig</a></code></li>
-    </ul>
+    <h1>{{ controller_name }}</h1>
+{# {{ dump(app.user) }} #}
+<p>
+{{ app.user.nom }}
+</p>
+<p>
+{{ app.user.prenom }}
+</p>
+<p>
+{{ app.user.adresse }}
+</p>
+<p>
+{{ app.user.codePostal }}
+</p>
+<p>
+{{ app.user.ville }}
+</p>
+<p>
+{{ app.user.email }}
+</p>
+<p>
+{{ app.user.telephone }}
+</p>
 </div>
+<p>
+{{ app.user.photo }}
+</p>
+<a href="{{ path('app_modification_mon_compte', {'id': app.user.id }) }}">
+			<button type="submit" class="btn btn-primary mt-2">
+            Modifier</button>
+		        </a>
 {% endblock %}

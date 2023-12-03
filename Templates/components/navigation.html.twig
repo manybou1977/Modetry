@@ -1,12 +1,14 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ path('app_home') }}">
-    <img src="{{ asset('assets/img/icon/logo3.png') }}" class="top-logo">
+    <img src="{{ asset('assets/img/icon/logo_3.png') }}" class="top-logo">
     </a>
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <div class="barnav">
+  
     {% if is_granted('ROLE_ADMIN') %}
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -15,7 +17,7 @@
         <li><a class="nav-link" aria-current="page" href="#">Femme</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Acceuil</a>
+          <a class="nav-link" aria-current="page" href="{{ path('app_home') }}">Acceuil</a>
         </li>
         
         <li class="nav-item dropdown">
@@ -28,6 +30,10 @@
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
+          <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{{ path('app_mon_compte') }}"><i class="fa-solid fa-user"></i></a>
+        </li>
+        
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
@@ -70,7 +76,7 @@
         <li><a class="nav-link" aria-current="page" href="#">Femme</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Acceuil</a>
+          <a class="nav-link" aria-current="page" href="{{ path('app_home') }}">Acceuil</a>
         </li>
         
         <li class="nav-item dropdown">
@@ -99,6 +105,6 @@
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form> #}
-    
+      </div>
   </div>
 </nav>

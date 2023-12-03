@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PanierController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    {% if panier is empty %}
+    <p>
+    Panier vide
+    </p>
+    {% else %}
+        {% for produit in panier %}
+        {{ produit.nom }}
+        {{ produit.taille }}
+        {{ produit.couleur }}
+        <img src="{{ asset(produit.image) }}" alt="{{ produit.nom }}" style="width: 25%">
+        {{ produit.prix }}
+        {{ produit.quantite }}
+        {{ produit.quantite * produit.prix }}
+            
+        {% endfor %}
+        {% endif %}
+
+   
+</div>
+{% endblock %}
