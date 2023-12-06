@@ -18,10 +18,16 @@ class Avis
     private ?string $commentaire = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeImmutable $datePublication = null;
+    private ?\DateTimeInterface $datePublication = null;
 
-    #[ORM\Column]
-    private ?int $note = null;
+    // #[ORM\Column]
+    // private ?int $note = null;
+
+    #[ORM\ManyToOne(inversedBy: 'avis')]
+    private ?Produits $produits = null;
+
+    #[ORM\ManyToOne(inversedBy: 'avis')]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -40,26 +46,50 @@ class Avis
         return $this;
     }
 
-    public function getDatePublication(): ?\DateTimeImmutable
+    public function getDatePublication(): ?\DateTimeInterface
     {
         return $this->datePublication;
     }
 
-    public function setDatePublication(\DateTimeImmutable $datePublication): static
+    public function setDatePublication(\DateTimeInterface $datePublication): static
     {
         $this->datePublication = $datePublication;
 
         return $this;
     }
 
-    public function getNote(): ?int
+    // public function getNote(): ?int
+    // {
+    //     return $this->note;
+    // }
+
+    // public function setNote(int $note): static
+    // {
+    //     $this->note = $note;
+
+    //     return $this;
+    // }
+
+    public function getProduits(): ?Produits
     {
-        return $this->note;
+        return $this->produits;
     }
 
-    public function setNote(int $note): static
+    public function setProduits(?Produits $produits): static
     {
-        $this->note = $note;
+        $this->produits = $produits;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -6,7 +6,7 @@
 <div class="container">
     <h1 class="mt-3 mb-4">Vêtements</h1>
     <div class="row">
-    {% for produit in produits %}
+    
 
 <div class="col-md-4">
                 <div class="card mb-4">
@@ -18,7 +18,6 @@
                         <p class="card-text">{{ produit.description }}</p>
                         <div class="d-flex justify-content-between align-item-center">
                             <a href="{{ path('app_ajout_panier',{'produitId': produit.id }) }}" class="btn btn-dark">Panier</a>
-                            <a href="{{ path('app_avis_produits',{'id': produit.id }) }}" class="btn btn-dark">Voir plus</a>
                             <span class="h5 mt-auto">{{ produit.prix }} €</span>
                             {% if produit.stock > 1 %}
                              <p>disponible</p> 
@@ -26,21 +25,38 @@
                             <p>Pas disponible</p>
                             {% endif %}
                         </div>
-                        {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('app_modification', {'id': produit.id }) }}">
-			<button type="submit" class="btn btn-primary mt-2"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>
-		        </a>
-             <a href="{{ path('app_produits_supprime', {'id': produit.id }) }}?token={{ csrf_token('suppression') }}">
-			<button type="submit" class="btn btn-danger mt-2"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
-		        </a>    
-        {% endif %}  
+                        
                     </div>
                 </div>
             </div>
             
-        {% endfor %}
+        
         
     </div>
-</div>   
+</div> 
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5 col-md-6 col-12 pb-4">
+            {% for commentaire in commentaire %}
+                <h1>Commentaire</h1>
+                <div class="comment mt-4 text-justify float-left">
+                    
+                    {# <h4>{{ commentaire.user_id }}</h4> #}
+                    <span>{{ commentaire.DatePublication|date('d-m-Y') }}</span>
+                    <br>
+                    <p>{{ commentaire.commentaire }}</p>
+                </div>
+               {% endfor %}
+             </div>
+        </div>
+     </div>
+
+<div class="example-wrapper">
+    <h1>Produits</h1>
+    {{ form_start(form) }}
+    {{ form_end(form) }}
+
+  
+</div>
 {% endblock %}
 

@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use DateTime;
+use App\Entity\Avis;
 use App\Entity\Produits;
 use App\Form\ProduitsType;
+use App\Form\FormulaireAvisType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -103,7 +106,7 @@ class ProduitsController extends AbstractController
 
         ]);
     } 
-    #[route('/produits/supprime/{id}', name: 'app_produits_supprime')]
+    #[Route('/produits/supprime/{id}', name: 'app_produits_supprime')]
     public function suppressionProduits(int $id, Request $request): Response
     {
         if ($this->isCsrfTokenValid('suppression',$request->query->get('token',''))){
@@ -116,6 +119,42 @@ class ProduitsController extends AbstractController
         }else {
             throw new BadRequestException('token csrf invalid');
         }
+    }
+    #[Route('/produits/avis/{id}', name:'app_avis_produits')]
+    public function produitsAvis(Request $request,$id){
+        $produit=$this->manager->getRepository(Produits::class)->find($id);
+        $user=$this->getUser();
+        $avis=new Avis();
+        $avis->setUser($user);
+        $avis->setProduits($produit);
+        $avis->setDatePublication(new \DateTime('today')  );
+        $form=$this->createForm(FormulaireAvisType::class,$avis);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $this->manager->persist($avis);
+            $this->manager->flush();
+
+            return $this->redirectToRoute('app_avis_produits',['id'=>$id]);
+
+        }
+        $commentaire=$produit->getAvis();
+        // usort($commantaire, function($a,$b){
+        //     return $b->getDatePublication
+        // })
+        
+        
+        return $this->render('produits/detailsProduits.html.twig',[
+            'produit'=>$produit,
+            'commentaire'=>$commentaire,
+            'form'=>$form->createView(),
+
+        ]);
+
+
+
+
+        
     }
 
 }
