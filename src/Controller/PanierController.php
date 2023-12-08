@@ -34,14 +34,18 @@ class PanierController extends AbstractController
         } else{
             $produit=$this->manager->getRepository(Produits::class)->find($produitId);
             if($produit){
+                $tailles=$produit->getTailles();
+                foreach($tailles as $taille){
+
                 $panier[$produitId]=[
                     'quantite'=>1,
                     'nom'=>$produit->getNom(),
                     'prix'=>$produit->getPrix(),
-                    'taille'=>$produit->getTailles()->getMesures(),
+                    'taille'=>$taille->getMesures(),
                     'couleur'=>$produit->getCouleur(),
                     'image'=>$produit->getImage(),
                 ];
+                 }
             }
         }
         $session->set('panier',$panier);
