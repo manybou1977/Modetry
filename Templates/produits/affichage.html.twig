@@ -13,7 +13,12 @@
                     <img src="{{ asset(produit.image) }}" alt="{{ produit.nom }}" class="card-img-top"> 
                     <div class="card-body">
                         <h5 class="card-title">{{ produit.nom }}</h5>
-                        <p class="card-text">{{ produit.taille }}</p>
+                        <select name="" id="">
+                        <option value="">Choix Tailles</option>
+                        {% for taille in produit.tailles %}
+                        <option value="{{ taille.mesures }}">{{ taille.mesures }}</option>
+                        {% endfor %}
+                        </select>
                         <p class="card-text">{{ produit.couleur }}</p>
                         <p class="card-text">{{ produit.description }}</p>
                         <div class="d-flex justify-content-between align-item-center">

@@ -22,9 +22,6 @@ class Produits
     private ?float $prix = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $taille = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $stock = null;
 
     #[ORM\Column(length: 255)]
@@ -43,9 +40,13 @@ class Produits
     #[ORM\OneToMany(mappedBy: 'produits', targetEntity: Avis::class)]
     private Collection $avis;
 
+    #[ORM\ManyToMany(targetEntity: Tailles::class, inversedBy: 'produits')]
+    private Collection $tailles;
+
     public function __construct()
     {
         $this->avis = new ArrayCollection();
+        $this->tailles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -73,18 +74,6 @@ class Produits
     public function setPrix(float $prix): static
     {
         $this->prix = $prix;
-
-        return $this;
-    }
-
-    public function getTaille(): ?string
-    {
-        return $this->taille;
-    }
-
-    public function setTaille(string $taille): static
-    {
-        $this->taille = $taille;
 
         return $this;
     }
@@ -176,6 +165,30 @@ class Produits
                 $avi->setProduits(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tailles>
+     */
+    public function getTailles(): Collection
+    {
+        return $this->tailles;
+    }
+
+    public function addTaille(Tailles $taille): static
+    {
+        if (!$this->tailles->contains($taille)) {
+            $this->tailles->add($taille);
+        }
+
+        return $this;
+    }
+
+    public function removeTaille(Tailles $taille): static
+    {
+        $this->tailles->removeElement($taille);
 
         return $this;
     }

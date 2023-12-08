@@ -38,7 +38,7 @@ class PanierController extends AbstractController
                     'quantite'=>1,
                     'nom'=>$produit->getNom(),
                     'prix'=>$produit->getPrix(),
-                    'taille'=>$produit->getTaille(),
+                    'taille'=>$produit->getTailles()->getMesures(),
                     'couleur'=>$produit->getCouleur(),
                     'image'=>$produit->getImage(),
                 ];

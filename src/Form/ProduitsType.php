@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Tailles;
 use App\Entity\Produits;
 use App\Entity\Categorie;
 use Symfony\Component\Form\AbstractType;
@@ -21,7 +22,14 @@ class ProduitsType extends AbstractType
         $builder
             ->add('nom',TextType::class)
             ->add('prix', NumberType::class)
-            ->add('taille',TextType::class)
+            ->add('tailles',EntityType::class,[
+                'class'=>Tailles::class,
+                'choice_label'=>function($choix){
+                    return 'Taille : '. $choix->getMesures();
+                },
+                'multiple'=>true,
+                'expanded'=>true,
+            ])
             ->add('stock',TextType::class)
             ->add('description',TextType::class)
             ->add('couleur',TextType::class)
