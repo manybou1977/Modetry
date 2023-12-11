@@ -2,7 +2,7 @@ body,
 html {
   margin: 0;
   padding: 0;
-  background: #25252B;
+  
 }
 * {
   touch-action: manipulation;
@@ -14,7 +14,6 @@ html {
 }
 body {
   position: relative;
-  color: white;
   letter-spacing: 2px;
   font-size: 11px;
   font-family: 'Poppins', sans-serif;

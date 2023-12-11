@@ -28,6 +28,14 @@ class PanierController extends AbstractController
     public function ajoutPanier($produitId, SessionInterface $session)
     {
         $panier=$session->get('panier',[]);
+        $produitPanier=$this->manager->getRepository(Produits::class)->find($produitId);
+        $selecTaille=$produitPanier->getTailles();
+
+        if(empty($selecTaille)){
+            $this->addFlash('error','Veuillez sélectionner une taille');
+            return $this->redirectToRoute('app_panier');
+        }
+
         if (isset($panier[$produitId])){
             $panier[$produitId]['quantite']++;
 
@@ -38,6 +46,7 @@ class PanierController extends AbstractController
                 foreach($tailles as $taille){
 
                 $panier[$produitId]=[
+                    'id'=>$produit->getId(),
                     'quantite'=>1,
                     'nom'=>$produit->getNom(),
                     'prix'=>$produit->getPrix(),
@@ -51,7 +60,7 @@ class PanierController extends AbstractController
         $session->set('panier',$panier);
         return $this->redirectToRoute('app_panier');
     }
-    #[Route('/panier/supression/{produitId}',name:'app_suppression_panier')]
+    #[Route('/panier/suppression/{produitId}',name:'app_suppression_panier')]
     public function suppressionPanier($produitId, sessionInterface $session)
     {
         $panier=$session->get('panier',[]);
@@ -59,6 +68,12 @@ class PanierController extends AbstractController
             unset($panier[$produitId]);
         }
         $session->set('panier', $panier);
+        return $this->redirectToRoute('app_panier');
+    }
+    #[Route('/suppression',name:'app_suppression_session')]
+    public function suprSession(sessionInterface $session)
+    {
+        $session->invalidate();
         return $this->redirectToRoute('app_panier');
     }
 }

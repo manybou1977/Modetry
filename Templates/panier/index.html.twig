@@ -22,6 +22,8 @@
         {{ produit.prix }}
         {{ produit.quantite }}
         {{ produit.quantite * produit.prix }}
+        <a href='{{ path('app_suppression_panier', {'produitId': produit.id }) }}' class='btn btn-danger'>supprimer
+        <a/>
             
         {% endfor %}
         {% endif %}

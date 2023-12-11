@@ -1,0 +1,33 @@
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 20px 0;
+}
+
+.social a {
+    color: #ffffff;
+    margin-right: 15px;
+}
+
+.social i {
+    font-size: 30px;
+}
+
+ul.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+ul.footer-links li {
+    display: inline;
+    margin-right: 15px;
+}
+
+ul.footer-links li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.copyright {
+    margin-top: 20px;
+}
