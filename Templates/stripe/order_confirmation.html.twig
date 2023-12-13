@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Confirmation{% endblock %}
+
+
+
+{% block body %}
+  <h1>ModeTry vous remercie pour votre confiance</h1>
+  <div>
+    <div class="container mt-5 mb-5 p-5 border d-flex flex-column justify-content-center align-items-center">
+      <h3>Votre commande est validé!!</h3>
+      <h5>Merci de votre confiance.</h5>
+      <h5>montant régler:
+        {{ total }}€</h5>
+        <button class="btn mt-4 m-auto">
+          <a class="btn btn-order mt-3" href="{{ path('app_home') }}">Retour à la boutique</a> 
+        </button>
+    </div>
+  </div>
+
+{% endblock %}

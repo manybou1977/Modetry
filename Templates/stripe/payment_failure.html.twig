@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Confirmation
+
+{% endblock %}
+
+{% block header%} {% endblock %}
+{% block body %}
+  <div>
+    <div class="mt-5 p-5 border border-primary d-flex flex-column justify-content-center align-items-center">
+      <h3>Votre paiement a été refusé !!</h3>
+      <h5>Votre carte n'a pas été débité, réessayer.</h5>
+      <h5>montant de votre commande:
+        {{ total }}€</h5>
+      <button class="btn">
+        <a class="mt-3 btn btn-order" href="{{ path('app_stripe') }}">Retour au paiment</a>
+      </button>
+    </div>
+  </div>
+
+{% endblock %}

@@ -98,7 +98,7 @@ class ProduitsController extends AbstractController
             }
             $this->manager->persist($produit);
             $this->manager->flush();
-            return $this->redirectToRoute('app_produits', []);
+            return $this->redirectToRoute('app_affichage', []);
         }
         return $this->render('produits/modification.html.twig', [
             "form"=> $form->createView()
