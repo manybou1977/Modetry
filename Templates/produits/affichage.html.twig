@@ -19,17 +19,25 @@
                     <img src="{{ asset(produit.image) }}" alt="{{ produit.nom }}" class="card-img-top"> 
                     <div class="card-body">
                         <h5 class="card-title">{{ produit.nom }}</h5>
-                        <select name="" id="" required>
+                        {# <select name="taille"  required>
                         <option value="" disabled selected hidden>Choix Tailles</option>
                         {% for taille in produit.tailles %}
-                        <option value="{{ taille.mesures }}">{{ taille.mesures }}</option>
+                        <option id="taille" value="{{ taille.mesures }}">{{ taille.mesures }}</option>
                         {% endfor %}
-                        </select>
+                        </select> #}
+                            <form method="post" action="{{ path('app_ajout_panier', {'produitId': produit.id }) }}">
+            <select name="taille" required>
+                <option value="" disabled selected hidden>Choix Tailles</option>
+                {% for taille in produit.tailles %}
+                    <option value="{{ taille.mesures }}">{{ taille.mesures }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-dark btn-hover btn-active">Ajouter au panier</button>
+        </form>
                         <p class="card-text">{{ produit.couleur }}</p>
                         <p class="card-text">{{ produit.description }}</p>
                         <div class="d-flex justify-content-between align-item-center">
-                            <a href="{{ path('app_ajout_panier',{'produitId': produit.id }) }}" class="btn btn-dark">Panier</a>
-                            <a href="{{ path('app_avis_produits',{'id': produit.id }) }}" class="btn btn-dark">Voir plus</a>
+                            <a href="{{ path('app_avis_produits',{'id': produit.id }) }}" class="btn btn-dark btn-hover">Voir plus</a>
                             <span class="h5 mt-auto">{{ produit.prix }} €</span>
                             {% if produit.stock > 1 %}
                              <p>disponible</p> 
@@ -53,5 +61,6 @@
         
     </div>
 </div>   
+
 {% endblock %}
 
