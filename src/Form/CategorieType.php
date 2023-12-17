@@ -24,7 +24,7 @@ class CategorieType extends AbstractType
             )
             ->add('enregistrer',SubmitType::class,[
                 'attr'=>[
-                    'class'=>'btn'
+                    'class'=>'btn btn-dark light btn-hover'
                 ]
             ])
         

@@ -55,7 +55,7 @@ class ModificationMonCompteFormType extends AbstractType
             ->add('enregistrer',SubmitType::class,
             [
                 'attr'=> [
-                    'class'=>'btn-primary'
+                    'class'=>'btn-dark text-light btn-hover'
                 ]
             ])
             

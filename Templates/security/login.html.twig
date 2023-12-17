@@ -14,7 +14,8 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter
+    </h1>
     <label for="inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
     <label for="inputPassword">Mot de passe</label>
@@ -24,9 +25,10 @@
            value="{{ csrf_token('authenticate') }}"
     >
 
-    <button class="btn btn-lg btn-primary" type="submit">
+    <button class="btn btn-lg btn-dark text-light btn-hover" type="submit">
         Se connecter
     </button>
+    <a class="btn btn-lg btn-dark text-light btn-hover" href="{{ path('app_register') }}">S'inscrire</a>
     <a href="{{ path('app_forgot_password_request') }}"> Mot de passe oublié
     <a/>
 </form>

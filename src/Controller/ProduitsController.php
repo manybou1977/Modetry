@@ -5,8 +5,10 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Avis;
 use App\Entity\Produits;
+use App\Entity\Categorie;
 use App\Form\ProduitsType;
 use App\Form\FormulaireAvisType;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -143,18 +145,27 @@ class ProduitsController extends AbstractController
         //     return $b->getDatePublication
         // })
         
-        
         return $this->render('produits/detailsProduits.html.twig',[
             'produit'=>$produit,
             'commentaire'=>$commentaire,
             'form'=>$form->createView(),
 
         ]);
-
-
-
-
         
     }
+    #[Route('/produit/femme',name:'app_produit_femme')]
+    public function affichageProduitFemme(EntityManagerInterface $entityManager): Response
+    {
+        $repository = $entityManager->getRepository(Categorie::class);
+        $genre = "Femme";
+        $query = $repository->createQueryBuilder('c')
+            ->where('c.genre = :genre')
+            ->setParameter('genre',$genre)
+            ->getQuery();
+            $produitFemme = $query->getResult();
 
+            return $this->render('produits/femme.html.twig',[
+                'produitFemme'=>$produitFemme
+            ]);
+    }
 }

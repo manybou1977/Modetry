@@ -32,12 +32,13 @@
 <p>
 {{ app.user.telephone }}
 </p>
-</div>
 <p>
 {{ app.user.photo }}
 </p>
 <a href="{{ path('app_modification_mon_compte', {'id': app.user.id }) }}">
-			<button type="submit" class="btn btn-primary mt-2">
+			<button type="submit" class="btn btn-dark text-light mt-2 btn-hover">
             Modifier</button>
-		        </a>
+		    </a>
+            </div>
+
 {% endblock %}

@@ -17,13 +17,25 @@ class PanierController extends AbstractController
     {
         $this->manager = $doctrine->getManager();   
     }
+    private function calculTotal(array $panier): float
+    {
+        $total=0;
+        foreach($panier as $produit){
+            $total += $produit['quantite']* $produit['prix'];
+        }
+        return $total;
+    }
     #[Route('/panier', name: 'app_panier')]
     public function index(SessionInterface $session): Response
     {
 
         $this->denyAccessUnlessGranted('ROLE_USER');
         $panier= $session->get('panier',[]);
+        $total=$this->calculTotal($panier);
+        $session->set('total',$total);
+    
         return $this->render('panier/index.html.twig', [
+            'total' =>$total,
             'panier' =>$panier,
         ]);
     }
@@ -34,7 +46,6 @@ class PanierController extends AbstractController
 
         $panier=$session->get('panier',[]);
         $produitPanier=$this->manager->getRepository(Produits::class)->find($produitId);
-        $total = $this->session->get('orderTotal');
 
        
        $tailleSelectionnee = $request->request->get('taille');
@@ -61,14 +72,16 @@ class PanierController extends AbstractController
                     'taille'=>$tailleSelectionnee,
                     'couleur'=>$produit->getCouleur(),
                     'image'=>$produit->getImage(),
-                    'total'=>$total
-                    
                 ];
                //  }
             }
         }
         $session->set('panier',$panier);
-        return $this->redirectToRoute('app_panier');
+        $total=$this->calculTotal($panier);
+        $session->set('total',$total);
+        return $this->redirectToRoute('app_panier',[
+            'total'=>$total
+        ]);
     }
     #[Route('/panier/suppression/{produitId}',name:'app_suppression_panier')]
     public function suppressionPanier($produitId, sessionInterface $session)
@@ -79,7 +92,11 @@ class PanierController extends AbstractController
             unset($panier[$produitId]);
         }
         $session->set('panier', $panier);
-        return $this->redirectToRoute('app_panier');
+        $total=$this->calculTotal($panier);
+        $session->set('total',$total);
+        return $this->redirectToRoute('app_panier',[
+            'total'=>$total
+        ]);
     }
     #[Route('/suppression',name:'app_suppression_session')]
     public function suprSession(sessionInterface $session)
