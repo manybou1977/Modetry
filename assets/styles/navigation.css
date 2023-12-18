@@ -6,3 +6,6 @@
  .barnav {
     margin-left: 20px;
  }
+ .nav-link {
+   color: black !important;
+ }

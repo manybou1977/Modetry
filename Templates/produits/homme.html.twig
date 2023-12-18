@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body %}
+    {% include "./components/navigationHomme.html.twig" %} 
 	{% for flashMessage in app.flashes('error') %}
 		<div class='alert alert-danger'>
 			{{ flashMessage }}
@@ -11,9 +12,9 @@
 
 	{% endfor %}
 	<div class="container">
-		<h1 class="mt-3 mb-4">Vêtements</h1>
+		<h1 class="mt-3 mb-4">{{ nomCategorie }} homme</h1>
 		<div class="row">
-			{% for produit in produits %}
+			{% for produit in produitHomme %}
 
 				<div class="col-md-4 d-flex align-items-stretch">
 					<div class="card mb-4">
@@ -21,11 +22,11 @@
 						<div class="card-body">
 							<h5 class="card-title">{{ produit.nom }}</h5>
 							{# <select name="taille"  required>
-																																										                        <option value="" disabled selected hidden>Choix Tailles</option>
-																																										                        {% for taille in produit.tailles %}
-																																										                        <option id="taille" value="{{ taille.mesures }}">{{ taille.mesures }}</option>
-																																										                        {% endfor %}
-																																										                        </select> #}
+																																			                        <option value="" disabled selected hidden>Choix Tailles</option>
+																																			                        {% for taille in produit.tailles %}
+																																			                        <option id="taille" value="{{ taille.mesures }}">{{ taille.mesures }}</option>
+																																			                        {% endfor %}
+																																			                        </select> #}
 							<form method="post" action="{{ path('app_ajout_panier', {'produitId': produit.id }) }}">
 								<select name="taille" required>
 									<option value="" disabled selected hidden>Choix Tailles</option>

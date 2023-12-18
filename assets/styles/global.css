@@ -1,12 +1,3 @@
-.jean {
-    width: 20rem;
-}
-
 .btn-hover:hover {
     background-color: #9105DD;
-}
-
-body {
-    margin-bottom: 50vh;
-    background-color: aqua;
 }

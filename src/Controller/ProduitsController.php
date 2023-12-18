@@ -154,18 +154,346 @@ class ProduitsController extends AbstractController
         
     }
     #[Route('/produit/femme',name:'app_produit_femme')]
-    public function affichageProduitFemme(EntityManagerInterface $entityManager): Response
-    {
-        $repository = $entityManager->getRepository(Categorie::class);
-        $genre = "Femme";
-        $query = $repository->createQueryBuilder('c')
-            ->where('c.genre = :genre')
-            ->setParameter('genre',$genre)
-            ->getQuery();
-            $produitFemme = $query->getResult();
+    public function affichageFemme(EntityManagerInterface $entityManager): Response
+{
+    $repositoryProduit = $entityManager->getRepository(Produits::class);
+    $repositoryCategorie = $entityManager->getRepository(Categorie::class);
 
-            return $this->render('produits/femme.html.twig',[
-                'produitFemme'=>$produitFemme
-            ]);
-    }
+   
+    $genreFemme = 'Femme';
+    $nomCategorie = 'Vêtements';
+
+    $query = $repositoryProduit->createQueryBuilder('p')
+        ->join('p.categorie', 'c')
+        ->where('c.genre = :genre')
+        ->setParameter('genre', $genreFemme)
+        ->getQuery();
+
+    $produitFemme = $query->getResult();
+
+    return $this->render('produits/femme.html.twig', [
+        "produitFemme" => $produitFemme,
+        "nomCategorie" => $nomCategorie,
+    ]);
+}
+
+#[Route('/produit/femme/chaussures',name:'app_produit_femme_chaussures')]
+public function affichageFemmeChaussures(EntityManagerInterface $entityManager): Response
+{
+$repositoryProduit = $entityManager->getRepository(Produits::class);
+$repositoryCategorie = $entityManager->getRepository(Categorie::class);
+
+
+$genreFemme = 'Femme';
+$nomCategorie = 'Chaussures';
+
+$query = $repositoryProduit->createQueryBuilder('p')
+    ->join('p.categorie', 'c')
+    ->where('c.genre = :genre')
+    ->andWhere('c.nom = :nom')
+    ->setParameters(['genre'=> $genreFemme,'nom'=>$nomCategorie])
+    ->getQuery();
+
+$produitFemme = $query->getResult();
+
+return $this->render('produits/femme.html.twig', [
+    "produitFemme" => $produitFemme,
+    "nomCategorie" => $nomCategorie,
+]);
+}
+
+#[Route('/produit/femme/accessoires',name:'app_produit_femme_accessoires')]
+public function affichageFemmeAccessoires(EntityManagerInterface $entityManager): Response
+{
+$repositoryProduit = $entityManager->getRepository(Produits::class);
+$repositoryCategorie = $entityManager->getRepository(Categorie::class);
+
+
+$genreFemme = 'Femme';
+$nomCategorie = 'Accessoires';
+
+$query = $repositoryProduit->createQueryBuilder('p')
+    ->join('p.categorie', 'c')
+    ->where('c.genre = :genre')
+    ->andWhere('c.nom = :nom')
+    ->setParameters(['genre'=> $genreFemme,'nom'=>$nomCategorie])
+    ->getQuery();
+
+$produitFemme = $query->getResult();
+
+return $this->render('produits/femme.html.twig', [
+    "produitFemme" => $produitFemme,
+    "nomCategorie" => $nomCategorie,
+]);
+}
+
+#[Route('/produit/femme/robe',name:'app_produit_femme_robe')]
+public function affichageFemmeRobe(EntityManagerInterface $entityManager): Response
+{
+$repositoryProduit = $entityManager->getRepository(Produits::class);
+$repositoryCategorie = $entityManager->getRepository(Categorie::class);
+
+
+$genreFemme = 'Femme';
+$nomCategorie = 'Robes';
+
+$query = $repositoryProduit->createQueryBuilder('p')
+    ->join('p.categorie', 'c')
+    ->where('c.genre = :genre')
+    ->andWhere('c.nom = :nom')
+    ->setParameters(['genre'=> $genreFemme,'nom'=>$nomCategorie])
+    ->getQuery();
+
+$produitFemme = $query->getResult();
+
+return $this->render('produits/femme.html.twig', [
+    "produitFemme" => $produitFemme,
+    "nomCategorie" => $nomCategorie,
+]);
+}
+
+#[Route('/produit/femme/jupe',name:'app_produit_femme_jupe')]
+public function affichageFemmeJupe(EntityManagerInterface $entityManager): Response
+{
+$repositoryProduit = $entityManager->getRepository(Produits::class);
+$repositoryCategorie = $entityManager->getRepository(Categorie::class);
+
+
+$genreFemme = 'Femme';
+$nomCategorie = 'Jupes';
+
+$query = $repositoryProduit->createQueryBuilder('p')
+    ->join('p.categorie', 'c')
+    ->where('c.genre = :genre')
+    ->andWhere('c.nom = :nom')
+    ->setParameters(['genre'=> $genreFemme,'nom'=>$nomCategorie])
+    ->getQuery();
+
+$produitFemme = $query->getResult();
+
+return $this->render('produits/femme.html.twig', [
+    "produitFemme" => $produitFemme,
+    "nomCategorie" => $nomCategorie,
+]);
+}
+
+#[Route('/produit/femme/pantalon',name:'app_produit_femme_pantalon')]
+public function affichageFemmePantalon(EntityManagerInterface $entityManager): Response
+{
+$repositoryProduit = $entityManager->getRepository(Produits::class);
+$repositoryCategorie = $entityManager->getRepository(Categorie::class);
+
+
+$genreFemme = 'Femme';
+$nomCategorie = 'Pantalons';
+
+$query = $repositoryProduit->createQueryBuilder('p')
+    ->join('p.categorie', 'c')
+    ->where('c.genre = :genre')
+    ->andWhere('c.nom = :nom')
+    ->setParameters(['genre'=> $genreFemme,'nom'=>$nomCategorie])
+    ->getQuery();
+
+$produitFemme = $query->getResult();
+
+return $this->render('produits/femme.html.twig', [
+    "produitFemme" => $produitFemme,
+    "nomCategorie" => $nomCategorie,
+]);
+}
+
+#[Route('/produit/femme/marque',name:'app_produit_femme_marque')]
+public function affichageFemmeMarque(EntityManagerInterface $entityManager): Response
+{
+$repositoryProduit = $entityManager->getRepository(Produits::class);
+$repositoryCategorie = $entityManager->getRepository(Categorie::class);
+
+
+$genreFemme = 'Femme';
+$nomCategorie = 'Marques';
+
+$query = $repositoryProduit->createQueryBuilder('p')
+    ->join('p.categorie', 'c')
+    ->where('c.genre = :genre')
+    ->andWhere('c.nom = :nom')
+    ->setParameters(['genre'=> $genreFemme,'nom'=>$nomCategorie])
+    ->getQuery();
+
+$produitFemme = $query->getResult();
+
+return $this->render('produits/femme.html.twig', [
+    "produitFemme" => $produitFemme,
+    "nomCategorie" => $nomCategorie,
+]);
+}
+
+#[Route('/produit/homme', name : 'app_produit_homme')]
+public function affichageHomme(EntityManagerInterface $entityManager): Response
+{
+    $repositoryProduit = $entityManager->getRepository(Produits::class);
+    $repositoryCategorie = $entityManager->getRepository(Categorie::class);
+
+   
+    $genreHomme = 'Homme';
+    $nomCategorie = 'Vêtements';
+
+    $query = $repositoryProduit->createQueryBuilder('p')
+        ->join('p.categorie', 'c')
+        ->where('c.genre = :genre')
+        ->setParameter('genre', $genreHomme)
+        ->getQuery();
+
+    $produitHomme = $query->getResult();
+
+    return $this->render('produits/homme.html.twig', [
+        "produitHomme" => $produitHomme,
+        "nomCategorie" => $nomCategorie,
+    ]);
+}
+
+#[Route('/produit/homme/pantalon',name:'app_produit_homme_pantalon')]
+public function affichageHommePantalon(EntityManagerInterface $entityManager): Response
+{
+$repositoryProduit = $entityManager->getRepository(Produits::class);
+$repositoryCategorie = $entityManager->getRepository(Categorie::class);
+
+
+$genre = 'Homme';
+$nomCategorie = 'Pantalons';
+
+$query = $repositoryProduit->createQueryBuilder('p')
+    ->join('p.categorie', 'c')
+    ->where('c.genre = :genre')
+    ->andWhere('c.nom = :nom')
+    ->setParameters(['genre'=> $genre,'nom'=>$nomCategorie])
+    ->getQuery();
+
+$produitHomme = $query->getResult();
+
+return $this->render('produits/homme.html.twig', [
+    "produitHomme" => $produitHomme,
+    "nomCategorie" => $nomCategorie,
+]);
+}
+#[Route('/produit/homme/veste',name:'app_produit_homme_veste')]
+public function affichageHommeVeste(EntityManagerInterface $entityManager): Response
+{
+$repositoryProduit = $entityManager->getRepository(Produits::class);
+$repositoryCategorie = $entityManager->getRepository(Categorie::class);
+
+
+$genre = 'Homme';
+$nomCategorie = 'Vestes';
+
+$query = $repositoryProduit->createQueryBuilder('p')
+    ->join('p.categorie', 'c')
+    ->where('c.genre = :genre')
+    ->andWhere('c.nom = :nom')
+    ->setParameters(['genre'=> $genre,'nom'=>$nomCategorie])
+    ->getQuery();
+
+$produitHomme = $query->getResult();
+
+return $this->render('produits/homme.html.twig', [
+    "produitHomme" => $produitHomme,
+    "nomCategorie" => $nomCategorie,
+]);
+}
+
+#[Route('/produit/homme/chemise',name:'app_produit_homme_chemise')]
+public function affichageHommeChemise(EntityManagerInterface $entityManager): Response
+{
+$repositoryProduit = $entityManager->getRepository(Produits::class);
+$repositoryCategorie = $entityManager->getRepository(Categorie::class);
+
+
+$genre = 'Homme';
+$nomCategorie = 'Chemises';
+
+$query = $repositoryProduit->createQueryBuilder('p')
+    ->join('p.categorie', 'c')
+    ->where('c.genre = :genre')
+    ->andWhere('c.nom = :nom')
+    ->setParameters(['genre'=> $genre,'nom'=>$nomCategorie])
+    ->getQuery();
+
+$produitHomme = $query->getResult();
+
+return $this->render('produits/homme.html.twig', [
+    "produitHomme" => $produitHomme,
+    "nomCategorie" => $nomCategorie,
+]);
+}
+#[Route('/produit/homme/accessoire',name:'app_produit_homme_accessoire')]
+public function affichageHommeAccessoire(EntityManagerInterface $entityManager): Response
+{
+$repositoryProduit = $entityManager->getRepository(Produits::class);
+$repositoryCategorie = $entityManager->getRepository(Categorie::class);
+
+
+$genre = 'Homme';
+$nomCategorie = 'Accessoires';
+
+$query = $repositoryProduit->createQueryBuilder('p')
+    ->join('p.categorie', 'c')
+    ->where('c.genre = :genre')
+    ->andWhere('c.nom = :nom')
+    ->setParameters(['genre'=> $genre,'nom'=>$nomCategorie])
+    ->getQuery();
+
+$produitHomme = $query->getResult();
+
+return $this->render('produits/homme.html.twig', [
+    "produitHomme" => $produitHomme,
+    "nomCategorie" => $nomCategorie,
+]);
+}
+#[Route('/produit/homme/chaussure',name:'app_produit_homme_chaussure')]
+public function affichageHommeChaussure(EntityManagerInterface $entityManager): Response
+{
+$repositoryProduit = $entityManager->getRepository(Produits::class);
+$repositoryCategorie = $entityManager->getRepository(Categorie::class);
+
+
+$genre = 'Homme';
+$nomCategorie = 'Chaussures';
+
+$query = $repositoryProduit->createQueryBuilder('p')
+    ->join('p.categorie', 'c')
+    ->where('c.genre = :genre')
+    ->andWhere('c.nom = :nom')
+    ->setParameters(['genre'=> $genre,'nom'=>$nomCategorie])
+    ->getQuery();
+
+$produitHomme = $query->getResult();
+
+return $this->render('produits/homme.html.twig', [
+    "produitHomme" => $produitHomme,
+    "nomCategorie" => $nomCategorie,
+]);
+}
+#[Route('/produit/homme/marque',name:'app_produit_homme_marque')]
+public function affichageHommeMarque(EntityManagerInterface $entityManager): Response
+{
+$repositoryProduit = $entityManager->getRepository(Produits::class);
+$repositoryCategorie = $entityManager->getRepository(Categorie::class);
+
+
+$genre = 'Homme';
+$nomCategorie = 'Marques';
+
+$query = $repositoryProduit->createQueryBuilder('p')
+    ->join('p.categorie', 'c')
+    ->where('c.genre = :genre')
+    ->andWhere('c.nom = :nom')
+    ->setParameters(['genre'=> $genre,'nom'=>$nomCategorie])
+    ->getQuery();
+
+$produitHomme = $query->getResult();
+
+return $this->render('produits/homme.html.twig', [
+    "produitHomme" => $produitHomme,
+    "nomCategorie" => $nomCategorie,
+]);
+}
 }
