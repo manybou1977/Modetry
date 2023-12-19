@@ -21,12 +21,7 @@
 						<img src="{{ asset(produit.image) }}" alt="{{ produit.nom }}" class="card-img-top">
 						<div class="card-body">
 							<h5 class="card-title">{{ produit.nom }}</h5>
-							{# <select name="taille"  required>
-																																			                        <option value="" disabled selected hidden>Choix Tailles</option>
-																																			                        {% for taille in produit.tailles %}
-																																			                        <option id="taille" value="{{ taille.mesures }}">{{ taille.mesures }}</option>
-																																			                        {% endfor %}
-																																			                        </select> #}
+							
 							<form method="post" action="{{ path('app_ajout_panier', {'produitId': produit.id }) }}">
 								<select name="taille" required>
 									<option value="" disabled selected hidden>Choix Tailles</option>
@@ -36,9 +31,7 @@
 								</select>
 								<button type="submit" class="btn btn-dark light btn-hover btn-active">Ajouter au panier</button>
 							</form>
-							<p class="card-text">{{ produit.couleur }}</p>
-							<p class="card-text">{{ produit.description }}</p>
-
+							
 						</div>
 						<div class="card-footer card-footer-align">
 

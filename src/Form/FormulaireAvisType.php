@@ -15,7 +15,9 @@ class FormulaireAvisType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('commentaire',TextareaType::class)
+        ->add('commentaire',TextareaType::class,[
+            'label'=> "Ajouter un commentaire"
+        ])
         ->add('valider',SubmitType::class)
         
         ;

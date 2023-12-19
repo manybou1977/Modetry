@@ -1,3 +1,16 @@
 .card .card-footer-align :is(span,p) {
     margin: 0;
 }
+
+.detail-produit img {
+    width: 100%;
+}
+.image-container{
+    height: 620px;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
