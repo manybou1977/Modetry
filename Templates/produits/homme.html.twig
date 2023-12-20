@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-    {% include "./components/navigationHomme.html.twig" %} 
+	{% include "./components/navigationHomme.html.twig" %}
 	{% for flashMessage in app.flashes('error') %}
 		<div class='alert alert-danger'>
 			{{ flashMessage }}
@@ -12,17 +12,23 @@
 
 	{% endfor %}
 	<div class="container">
-		<h1 class="mt-3 mb-4">{{ nomCategorie }} homme</h1>
+		<h1 class="mt-3 mb-4">{{ nomCategorie }}
+			homme</h1>
 		<div class="row">
 			{% for produit in produitHomme %}
 
 				<div class="col-md-4 d-flex align-items-stretch">
 					<div class="card mb-4">
-						<img src="{{ asset(produit.image) }}" alt="{{ produit.nom }}" class="card-img-top">
+						<div class="image-container">
+							<img src="{{ asset(produit.image) }}" alt="{{ produit.nom }}" class="card-img-top">
+						</div>
 						<div class="card-body">
 							<h5 class="card-title">{{ produit.nom }}</h5>
-							
-							<form method="post" action="{{ path('app_ajout_panier', {'produitId': produit.id }) }}">
+							<p class="card-text">{{ produit.couleur }}</p>
+							<p class="card-text">{{ produit.description }}</p>
+						</div>
+						<div class="card-body card-body-form">
+							<form method="post" class="form-button" action="{{ path('app_ajout_panier', {'produitId': produit.id }) }}">
 								<select name="taille" required>
 									<option value="" disabled selected hidden>Choix Tailles</option>
 									{% for taille in produit.tailles %}
@@ -31,9 +37,9 @@
 								</select>
 								<button type="submit" class="btn btn-dark light btn-hover btn-active">Ajouter au panier</button>
 							</form>
-							
 						</div>
 						<div class="card-footer card-footer-align">
+
 
 							<div class="d-flex justify-content-between align-item-center">
 								<a href="{{ path('app_avis_produits',{'id': produit.id }) }}" class="btn btn-dark btn-hover">Voir plus</a>
@@ -47,16 +53,20 @@
 							</div>
 						</div>
 						{% if is_granted('ROLE_ADMIN') %}
-							<a href="{{ path('app_modification', {'id': produit.id }) }}">
-								<button type="submit" class="btn btn-dark light btn-hover mt-2">
-									<i class="fa-solid fa-pen" aria-hidden="true"></i>
-								</button>
-							</a>
-							<a href="{{ path('app_produits_supprime', {'id': produit.id }) }}?token={{ csrf_token('suppression') }}">
-								<button type="submit" class="btn btn-danger mt-2">
-									<i class="fa-solid fa-trash" aria-hidden="true"></i>
-								</button>
-							</a>
+							<div class="button-admin-container">
+								<a href="{{ path('app_modification', {'id': produit.id }) }}">
+									<button type="submit" class="btn btn-dark light btn-hover mt-2">
+										<i class="fa-solid fa-pen" aria-hidden="true"></i>
+										Modifier
+									</button>
+								</a>
+								<a href="{{ path('app_produits_supprime', {'id': produit.id }) }}?token={{ csrf_token('suppression') }}">
+									<button type="submit" class="btn btn-danger mt-2">
+										<i class="fa-solid fa-trash" aria-hidden="true"></i>
+										Supprimer
+									</button>
+								</a>
+							</div>
 						{% endif %}
 					</div>
 				</div>
