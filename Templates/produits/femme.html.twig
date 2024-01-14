@@ -20,7 +20,7 @@
 				<div class="col-md-4 d-flex align-items-stretch">
 					<div class="card mb-4">
 						<div class="image-container">
-						<img src="{{ asset(produit.image) }}" alt="{{ produit.nom }}" class="card-img-top">
+							<img src="{{ asset(produit.image) }}" alt="{{ produit.nom }}" class="card-img-top">
 						</div>
 						<div class="card-body">
 							<h5 class="card-title">{{ produit.nom }}</h5>
@@ -51,16 +51,20 @@
 							</div>
 						</div>
 						{% if is_granted('ROLE_ADMIN') %}
-							<a href="{{ path('app_modification', {'id': produit.id }) }}">
-								<button type="submit" class="btn btn-dark light btn-hover mt-2">
-									<i class="fa-solid fa-pen" aria-hidden="true"></i>
-								</button>
-							</a>
-							<a href="{{ path('app_produits_supprime', {'id': produit.id }) }}?token={{ csrf_token('suppression') }}">
-								<button type="submit" class="btn btn-danger mt-2">
-									<i class="fa-solid fa-trash" aria-hidden="true"></i>
-								</button>
-							</a>
+							<div class="button-admin-container">
+								<a href="{{ path('app_modification', {'id': produit.id }) }}">
+									<button type="submit" class="btn btn-dark light btn-hover mt-2">
+										<i class="fa-solid fa-pen" aria-hidden="true"></i>
+										Modifier
+									</button>
+								</a>
+								<a href="{{ path('app_produits_supprime', {'id': produit.id }) }}?token={{ csrf_token('suppression') }}">
+									<button type="submit" class="btn btn-danger mt-2">
+										<i class="fa-solid fa-trash" aria-hidden="true"></i>
+										Supprimer
+									</button>
+								</a>
+							</div>
 						{% endif %}
 					</div>
 				</div>

@@ -9,13 +9,13 @@ body,
   box-sizing: border-box;
 
 }
-body {
+/* body {
   position: relative;
   letter-spacing: 2px;
   font-size: 1.2em;
   font-family: 'Roboto', sans-serif; 
   width: 100%;
-}
+} */
 main {
   margin-bottom: 50px;
 }
@@ -31,8 +31,8 @@ h1{
   align-items: center;
 }
 #c {
-  position: absolute;
-  top: 0;
+  position: relative;
+  top: 90px;
   width: 100%;
   height: 100%;
   display: block;

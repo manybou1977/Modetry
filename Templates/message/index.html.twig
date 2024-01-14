@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Message
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1>Messages</h1>
+
+				<h2>Messages reçus</h2>
+				<ul>
+					{% for message in receivedMessages %}
+						<li>
+							de:
+							{{ message.getSender().getPseudo() }}
+							-
+							{{ message.getContent() }}
+						</li>
+                        <p>
+                        <a href="{{ path('message_conversation', {'id': message.sender.id}) }}" class="text-decoration-none text-hover ">
+									<i class="fa-solid fa-reply"></i>
+								</a>
+                                
+                                Répondre
+                                </p>
+					{% endfor %}
+				</ul>
+
+				<h2>Messages envoyés</h2>
+				<ul>
+					{% for message in sentMessages %}
+						<li>
+							à:
+							{{ message.getReceiver().getPseudo() }}
+							-
+							{{ message.getContent() }}
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -16,18 +16,22 @@ class Chat
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $auteur = null;
+    
 
     #[ORM\Column(length: 255)]
-    private ?string $message = null;
+    private ?string $content = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $dateMessage = null;
+    private ?\DateTimeInterface $timestamp = null;
 
-    #[ORM\ManyToOne(inversedBy: 'chats')]
-    private ?User $user = null;
+    #[ORM\ManyToOne(inversedBy: 'sender')]
+    private ?User $sender = null;
 
+    #[ORM\ManyToOne]
+    private ?User $receiver = null;
+
+    #[ORM\Column]
+    private ?bool $isRead = null;
 
     public function __construct()
     {
@@ -39,54 +43,68 @@ class Chat
         return $this->id;
     }
 
-    public function getAuteur(): ?string
+
+    public function getContent(): ?string
     {
-        return $this->auteur;
+        return $this->content;
     }
 
-    public function setAuteur(string $auteur): static
+    public function setContent(string $content): static
     {
-        $this->auteur = $auteur;
+        $this->content = $content;
 
         return $this;
     }
 
-    public function getMessage(): ?string
+    public function getTimestamp(): ?\DateTimeInterface
     {
-        return $this->message;
+        return $this->timestamp;
     }
 
-    public function setMessage(string $message): static
+    public function setTimestamp(\DateTimeInterface $timestamp): static
     {
-        $this->message = $message;
+        $this->timestamp = $timestamp;
 
         return $this;
     }
 
-    public function getDateMessage(): ?\DateTimeInterface
+    public function getSender(): ?User
     {
-        return $this->dateMessage;
+        return $this->sender;
     }
 
-    public function setDateMessage(\DateTimeInterface $dateMessage): static
+    public function setSender(?User $sender): static
     {
-        $this->dateMessage = $dateMessage;
+        $this->sender = $sender;
 
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getReceiver(): ?User
     {
-        return $this->user;
+        return $this->receiver;
     }
 
-    public function setUser(?User $user): static
+    public function setReceiver(?User $receiver): static
     {
-        $this->user = $user;
+        $this->receiver = $receiver;
 
         return $this;
     }
 
+    public function isIsRead(): ?bool
+    {
+        return $this->isRead;
+    }
+
+    public function setIsRead(bool $isRead): static
+    {
+        $this->isRead = $isRead;
+
+        return $this;
+    }
+
+    
 
   
 }

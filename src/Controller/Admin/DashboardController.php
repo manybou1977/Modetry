@@ -10,6 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
+    //public function __construct(private ChartBuilderInterface $charteBuilder)
+
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {

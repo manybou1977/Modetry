@@ -59,8 +59,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255,nullable: true)]
     private ?string $photo = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Chat::class)]
-    private Collection $chats;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: TryOn::class)]
     private Collection $tryOns;
@@ -74,12 +72,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Avis::class)]
     private Collection $avis;
 
+    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: Chat::class)]
+    private Collection $sender;
+
+    #[ORM\OneToMany(mappedBy: 'receiver', targetEntity: Chat::class)]
+    private Collection $receiver;
+
     public function __construct()
     {
-        $this->chats = new ArrayCollection();
+        
         $this->tryOns = new ArrayCollection();
         $this->commandes = new ArrayCollection();
         $this->avis = new ArrayCollection();
+        $this->sender = new ArrayCollection();
+        $this->receiver = new ArrayCollection();
     }
 
 
@@ -262,36 +268,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Chat>
-     */
-    public function getChats(): Collection
-    {
-        return $this->chats;
-    }
-
-    public function addChat(Chat $chat): static
-    {
-        if (!$this->chats->contains($chat)) {
-            $this->chats->add($chat);
-            $chat->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeChat(Chat $chat): static
-    {
-        if ($this->chats->removeElement($chat)) {
-            // set the owning side to null (unless already changed)
-            if ($chat->getUser() === $this) {
-                $chat->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, TryOn>
      */
     public function getTryOns(): Collection
@@ -387,6 +363,65 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($avi->getUser() === $this) {
                 $avi->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Chat>
+     */
+    public function getSender(): Collection
+    {
+        return $this->sender;
+    }
+
+    public function addSender(Chat $sender): static
+    {
+        if (!$this->sender->contains($sender)) {
+            $this->sender->add($sender);
+            $sender->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSender(Chat $sender): static
+    {
+        if ($this->sender->removeElement($sender)) {
+            // set the owning side to null (unless already changed)
+            if ($sender->getSender() === $this) {
+                $sender->setSender(null);
+            }
+        }
+
+        return $this;
+    }
+    /**
+     * @return Collection<int, Chat>
+     */
+    public function getReceiver(): Collection
+    {
+        return $this->receiver;
+    }
+
+    public function addReceiver(Chat $receiver): static
+    {
+        if (!$this->receiver->contains($receiver)) {
+            $this->receiver->add($receiver);
+            $receiver->setReceiver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReceiver(Chat $receiver): static
+    {
+        if ($this->receiver->removeElement($sender)) {
+            // set the owning side to null (unless already changed)
+            if ($receiver->getReceiver() === $this) {
+                $receiver->setReceiver(null);
             }
         }
 

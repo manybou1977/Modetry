@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conversation
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1>Conversation avec
+					{{ otherUser.getPseudo() }}</h1>
+
+				<ul>
+					{% for message in messages %}
+						<li>
+							{% if message.getSender() == otherUser %}
+								From:
+								{{ message.getSender().getPseudo() }}
+								-
+								{{ message.getContent() }}
+							{% else %}
+								To:
+								{{ message.getReceiver().getPseudo() }}
+								-
+								{{ message.getContent() }}
+							{% endif %}
+						</li>
+					{% endfor %}
+				</ul>
+
+				<form method="post" action="{{ path('message_send', {'id': otherUser.getId()}) }}">
+					<label for="content">New Message:</label>
+					<textarea id="content" name="content"></textarea>
+					<button type="submit">Send</button>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

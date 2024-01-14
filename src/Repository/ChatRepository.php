@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Chat;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Chat>
@@ -21,6 +22,46 @@ class ChatRepository extends ServiceEntityRepository
         parent::__construct($registry, Chat::class);
     }
 
+    public function findConversation(User $user, User $otherUser)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('(m.sender = :user AND m.receiver = :otherUser) OR (m.sender = :otherUser AND m.receiver = :user)')
+            ->setParameter('user', $user)
+            ->setParameter('otherUser', $otherUser)
+            ->orderBy('m.timestamp', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByReceiver(User $user)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.receiver = :user')
+            ->setParameter('user', $user)
+            ->orderBy('m.timestamp', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findBySender(User $user)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.sender = :user')
+            ->setParameter('user', $user)
+            ->orderBy('m.timestamp', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    public function findMessageNonLu(User $user)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.receiver = :user')
+            ->andWhere('m.isRead = :isRead')
+            ->setParameter('user', $user)
+            ->setParameter('isRead', false)
+            ->getQuery()
+            ->getResult();
+    }
 //    /**
 //     * @return Chat[] Returns an array of Chat objects
 //     */

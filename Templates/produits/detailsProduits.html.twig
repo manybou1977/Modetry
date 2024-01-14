@@ -29,17 +29,26 @@
 					</select>
 					<button type="submit" class="btn btn-dark">Ajouter au panier</button>
 				</form>
-				<h1>Commentaires</h1>
-				{% for commentaire in commentaire %}
-					<div
-						class="comment mt-4 text-justify float-left">
-
-						{# <h4>{{ commentaire.user_id }}</h4> #}
-						<span>{{ commentaire.DatePublication|date('d-m-Y') }}</span>
-						<br>
-						<p>{{ commentaire.commentaire }}</p>
-					</div>
-				{% endfor %}
+				{% if commentaire is not empty %}
+					<h1>Commentaire</h1>
+					{% for commentaire in commentaire %}
+						<div
+							class="comment mt-4 text-justify float-left">
+							
+							<span>{{ commentaire.DatePublication|date('d-m-Y') }}</span>
+							<span>{{ commentaire.user.pseudo}}</span>
+							{% if commentaire.user is not null %}
+								<a href="{{ path('message_conversation', {'id': commentaire.user.id}) }}">
+									<i class="fa-solid fa-envelope"></i>
+								</a>
+							{% endif %}
+							<br>
+							<p>{{ commentaire.commentaire }}</p>
+						</div>
+					{% endfor %}
+				{% else %}
+					<p>Aucun commentaire associé à l'article</p>
+				{% endif %}
 				<div class="example-wrapper">
 					{{ form_start(form) }}
 					{{ form_end(form) }}
