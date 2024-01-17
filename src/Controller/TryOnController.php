@@ -45,11 +45,11 @@ class TryOnController extends AbstractController
                     $this->addFlash('error', 'Une erreur est survenue : ' . $e->getMessage());
                     return $this->redirectToRoute('app_avis_produits', ['id' => $id]);
                 }
-                $tryOn->set($nouveauChemin);
+                $tryOn->setPhoto($nouveauChemin);
             }
             $this->manager->persist($tryOn);
             $this->manager->flush();
-            return $this->redirectToRoute('app_avis_produits', ['id' => $id]);
+            return $this->redirectToRoute('app_mon_compte', ['id' => $id]);
         }
 			return $this->render('try_on/index.html.twig',[
                 'form'=>$form->createView(),
@@ -57,4 +57,53 @@ class TryOnController extends AbstractController
             ]);
     }
 
+    #[Route('/try_on/modification/{id}', name: 'app_modification_try_on')]
+    public function modificationTryOn(Request $request,TryOn $tryOn, SluggerInterface $slugger ): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $form=$this->createForm(TryOnType::class, $tryOn);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+         
+            $newPhotoFile = $form->get('photo')->getData();
+
+            if ($newPhotoFile) {
+                $cheminOrigine = pathinfo($newPhotoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($cheminOrigine);
+                $nouveauChemin = $safeFilename . '-' . uniqid() . '.' . $newPhotoFile->guessExtension();
+
+                try {
+                    $newPhotoFile->move(
+                        $this->getParameter('IMG_URL_USER'),
+                        $nouveauChemin
+                    );
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Une erreur est survenue : ' . $e->getMessage());
+                    return $this->redirectToRoute('app_avis_produits', ['id' => $id]);
+                }
+                $tryOn->setPhoto($nouveauChemin);
+            }
+
+            $this->manager->persist($tryOn);
+            $this->manager->flush();
+            return $this->redirectToRoute('app_mon_compte', []);
+        }
+        return $this->render('try_on/index.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+    #[Route('/try_on/supprime/{id}', name: 'app_supprime_try_on')]
+    public function suppressionTryOn(int $id, Request $request): Response
+    {
+        if ($this->isCsrfTokenValid('suppression',$request->query->get('token',''))){
+            if($id){
+                $tryOn = $this->manager->getRepository(TryOn::class)->find($id);
+                $this->manager->remove($tryOn);
+                $this->manager->flush();
+            }
+            return $this->redirectToRoute('app_mon_compte');
+        }else {
+            throw new BadRequestException('token csrf invalid');
+        }
+    }
 }
