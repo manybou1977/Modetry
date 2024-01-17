@@ -31,7 +31,7 @@
       renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
       renderer.shadowMap.enabled = true;
       renderer.setPixelRatio(window.devicePixelRatio);
-      document.body.appendChild(renderer.domElement);
+      document.body.querySelector('main').appendChild(renderer.domElement);
       
       // Add a camera
       camera = new THREE.PerspectiveCamera(

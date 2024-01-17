@@ -104,4 +104,36 @@ class PanierController extends AbstractController
         $session->invalidate();
         return $this->redirectToRoute('app_panier');
     }
+
+    #[Route('/panier/augmenter/{produitId}', name: 'app_augmenter_panier')]
+public function augmenterPanier($produitId,SessionInterface $session)
+{
+    $panier = $session->get('panier',[]);
+    if(isset($panier[$produitId])){
+        $panier[$produitId]['quantite']++;
+    }
+    $session->set('panier',$panier);
+    $total=$this->calculTotal($panier);
+    $session->set('total_panier', $total);
+    return $this->redirectToRoute('app_panier',[
+        'total'=>$total
+    ]);
+}
+
+#[Route('/panier/diminuer/{produitId}', name: 'app_diminuer_panier')]
+public function diminuerPanier($produitId,SessionInterface $session)
+{
+    $panier = $session->get('panier',[]);
+    if(isset($panier[$produitId]) && $panier[$produitId]['quantite']>1){
+        $panier[$produitId]['quantite']--;
+    }else {
+        unset($panier[$produitId]);
+    }
+    $session->set('panier',$panier);
+    $total=$this->calculTotal($panier);
+    $session->set('total_panier', $total);
+    return $this->redirectToRoute('app_panier',[
+        'total'=>$total
+    ]);
+}
 }

@@ -27,18 +27,20 @@
 							<option value="{{ taille.mesures }}">{{ taille.mesures }}</option>
 						{% endfor %}
 					</select>
-					<button type="submit" class="btn btn-dark">Ajouter au panier</button>
+					<button type="submit" class="btn btn-hover btn-dark">Ajouter au panier</button>
+					<a href="{{ path('app_try_on',{'id': produit.id }) }}">
+					<img src="{{ asset('assets/img/icon/cintre.png') }}" class='cintre' alt="">
+				</a>
 				</form>
 				{% if commentaire is not empty %}
 					<h1>Commentaire</h1>
 					{% for commentaire in commentaire %}
-						<div
-							class="comment mt-4 text-justify float-left">
-							
+						<div class="comment mt-4 text-justify float-left">
+
 							<span>{{ commentaire.DatePublication|date('d-m-Y') }}</span>
 							<span>{{ commentaire.user.pseudo}}</span>
 							{% if commentaire.user is not null %}
-								<a href="{{ path('message_conversation', {'id': commentaire.user.id}) }}">
+								<a href="{{ path('message_conversation', {'id': commentaire.user.id}) }}" class="text-hover">
 									<i class="fa-solid fa-envelope"></i>
 								</a>
 							{% endif %}

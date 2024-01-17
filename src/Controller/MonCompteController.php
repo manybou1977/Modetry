@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\TryOn;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Form\ModificationMonCompteFormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,8 +22,14 @@ class MonCompteController extends AbstractController
     public function index(): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
+        $userId = $this->getUser();
+        $photo = $this->manager->getRepository(TryOn::class)->findBy([
+            'user'=>$userId->getId()
+        ]);
+        //dump($photo);
+        //die;
         return $this->render('mon_compte/index.html.twig', [
-            'controller_name' => 'Mon Compte',
+            'tryon' => $photo,
         ]);
     }
 

@@ -14,12 +14,12 @@
 					{% for message in messages %}
 						<li>
 							{% if message.getSender() == otherUser %}
-								From:
+								De:
 								{{ message.getSender().getPseudo() }}
 								-
 								{{ message.getContent() }}
 							{% else %}
-								To:
+								à:
 								{{ message.getReceiver().getPseudo() }}
 								-
 								{{ message.getContent() }}
@@ -29,9 +29,9 @@
 				</ul>
 
 				<form method="post" action="{{ path('message_send', {'id': otherUser.getId()}) }}">
-					<label for="content">New Message:</label>
+					<label for="content">Ecrire un Message:</label>
 					<textarea id="content" name="content"></textarea>
-					<button type="submit">Send</button>
+					<button type="submit">Envoyé</button>
 				</form>
 			</div>
 		</div>

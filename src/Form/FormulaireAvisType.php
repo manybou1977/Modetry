@@ -18,7 +18,11 @@ class FormulaireAvisType extends AbstractType
         ->add('commentaire',TextareaType::class,[
             'label'=> "Ajouter un commentaire"
         ])
-        ->add('valider',SubmitType::class)
+        ->add('valider',SubmitType::class,[
+            'attr'=>[
+                'class'=> 'btn btn-hover btn-dark text-light'
+            ]
+        ])
         
         ;
     }

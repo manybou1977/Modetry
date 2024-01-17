@@ -23,7 +23,11 @@
                      {# <td><img src="{{ asset(produit.image) }}" alt="{{ produit.nom }}" style="width: 5%"></td> #}
                         <td>{{ produit.nom }}</td>
                         <td>{{ produit.prix }} €</td>
-                        <td>{{ produit.quantite }}</td>
+                        <td>
+                        <a href="{{ path('app_diminuer_panier', {'produitId': produit.id }) }}" class="btn  btn-hover btn-dark text-ligth">-</a>
+                        {{ produit.quantite }}
+                        <a href="{{ path('app_augmenter_panier', {'produitId': produit.id }) }}" class="btn  btn-hover btn-dark text-ligth">+</a>
+                        </td>
                         <td>{{ produit.prix * produit.quantite }} €</td>
                         <td>
                             <a href="{{ path('app_suppression_panier', {'produitId': produit.id }) }}" class="btn btn-danger">Supprimer</a>

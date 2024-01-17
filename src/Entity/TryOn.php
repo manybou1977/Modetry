@@ -32,7 +32,7 @@ class TryOn
 
     public function getPhoto(): ?string
     {
-        return $this->photo;
+        return $this->photo ? 'assets/img/user/' . $this->photo : '';
     }
 
     public function setPhoto(string $photo): static

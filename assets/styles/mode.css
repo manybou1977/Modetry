@@ -31,8 +31,8 @@ h1{
   align-items: center;
 }
 #c {
+  margin-bottom: -50px;
   position: relative;
-  top: 90px;
   width: 100%;
   height: 100%;
   display: block;
@@ -107,4 +107,8 @@ h1{
 .card-body-form {
   height: 80px;
 
+}
+.card-body-photo{
+  margin-left: 30rem;
+  
 }

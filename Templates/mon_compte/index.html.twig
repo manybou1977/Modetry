@@ -1,44 +1,75 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello Mon Compte{% endblock %}
+{% block title %}Mon Compte
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
 
-<div class="example-wrapper">
-    <h1>{{ controller_name }}</h1>
-{# {{ dump(app.user) }} #}
-<p>
-{{ app.user.nom }}
-</p>
-<p>
-{{ app.user.prenom }}
-</p>
-<p>
-{{ app.user.adresse }}
-</p>
-<p>
-{{ app.user.codePostal }}
-</p>
-<p>
-{{ app.user.ville }}
-</p>
-<p>
-{{ app.user.email }}
-</p>
-<p>
-{{ app.user.telephone }}
-</p>
-<p>
-{{ app.user.photo }}
-</p>
-<a href="{{ path('app_modification_mon_compte', {'id': app.user.id }) }}">
+	<div class='container'></div>
+	<div class="example-wrapper">
+		<h1>Mon compte</h1>
+		{# {{ dump(app.user) }} #}
+
+		<p>
+			{{ app.user.nom }}
+		</p>
+		<p>
+			{{ app.user.prenom }}
+		</p>
+		<p>
+			{{ app.user.adresse }}
+		</p>
+		<p>
+			{{ app.user.codePostal }}
+		</p>
+		<p>
+			{{ app.user.ville }}
+		</p>
+		<p>
+			{{ app.user.email }}
+		</p>
+		<p>
+			{{ app.user.telephone }}
+		</p>
+		<p>
+			{{ app.user.photo }}
+		</p>
+
+		<a href="{{ path('app_modification_mon_compte', {'id': app.user.id }) }}">
 			<button type="submit" class="btn btn-dark text-light mt-2 btn-hover">
-            Modifier</button>
-		    </a>
-            </div>
+				Modifier</button>
+		</a>
+	</div>
+	{% for photo in tryon %}
+		<div class="card-body-photo">
+			<img src="{{ asset(photo.photo) }}" alt="">
+            <p>
+			{{ photo.commentaire }}
+			</p>
+            <a href="{{ path('app_try_on', {'id': photo.id }) }}">
+			<button type="submit" class="btn btn-dark text-light mt-2 btn-hover">
+            <i class="fa-solid fa-pen" aria-hidden="true"></i>
+				Modifier</button>
 
+            <a href="{{ path('app_try_on', {'id': photo.id }) }}?token={{ csrf_token('suppression') }}">
+									<button type="submit" class="btn btn-danger mt-2">
+										<i class="fa-solid fa-trash" aria-hidden="true"></i>
+										Supprimer
+									</button>
+								</a>
+		    {% endfor %}
+        </div>
+	</div>
 {% endblock %}
