@@ -1,72 +1,65 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>
-{% block title %}Welcome!
-{% endblock %}
-</title>
-{% block meta %}
-{# bloc destiné à recevoir les méta OG de construction de posts pour les
-réseaux sociaux et les méta twitter #}
-{% endblock %}
-<link
-rel="icon" href="{{ asset('assets/img/icon/logo_final.png') }}">
-{# Run `composer require symfony/webpack-encore-bundle` to start using
-Symfony UX #}
-<link
-href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.cs
-s" rel="stylesheet"
-integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
-crossorigin="anonymous">
-{# import des icons image google home cliquer sur l'icon puis instruction
-#}
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-rel="stylesheet">
-{# import des icons Font awesome #}
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{% block meta %}
+			{# bloc destiné à recevoir les méta OG de construction de posts pour les
+			réseaux sociaux et les méta twitter #}
+		{% endblock %}
+		<link
+		rel="icon" href="{{ asset('assets/img/icon/logo_final.png') }}">
+		{# Run `composer require symfony/webpack-encore-bundle` to start using
+		Symfony UX #}
+		<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.cs
+			s" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+		{# import des icons image google home cliquer sur l'icon puis instruction
+		#}
+		<link
+		href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		{# import des icons Font awesome #}
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&display=swap">
-<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-{% block stylesheets %}
-{{ encore_entry_link_tags('app') }}
-{% endblock %}
-{# import du css perso la methode asset permet de generér le lien
-automatiquement avec twig#}
-<link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-</head>
-{% block bodyId %}
-{% endblock %}
-{% block navbar %}
-{% include "./components/navigation.html.twig" %}
-{% endblock %}
-{# {% include mettre le lien pour inclure la nav bar %} #}
-<header>
-{% block header %}{% endblock %}
-</header>
-<body>
-    
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&display=swap">
+		<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+		{# import du css perso la methode asset permet de generér le lien
+		automatiquement avec twig#}
+		<link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+        <meta name="description" content="modetryon est un site de vêtements en ligne avec la possibilité d'effectuer un essayage virtuel"/>
+	</head>
+	{% block bodyId %}{% endblock %}
+	{% block navbar %}
+		{% include "./components/navigation.html.twig" %}
+	{% endblock %}
+	{# {% include mettre le lien pour inclure la nav bar %} #}
+	<header>
+		{% block header %}{% endblock %}
+	</header>
+	<body>
 
-<main>
-{% block body %}{% endblock %}
-</main>
-{% block bottomReassurance %}{% endblock %}
-{% include "./components/footer.html.twig" %}
-{# {% include mettre le lien pour inclure le footer %} #}
-{# script bootstrap #}<script
-src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.m
-in.js"
-integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
-crossorigin="anonymous"> </script>
-{# script jsquery #}
-<script
-src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-{% block javascripts %}
-{{ encore_entry_script_tags('app') }}
-{% endblock %}
-{# Js perso import grace à js #}
-<script src="{{ asset('assets/js/app.js') }}"></script>
-</body>
+
+		<main>
+			{% block body %}{% endblock %}
+		</main>
+		{% block bottomReassurance %}{% endblock %}
+		{% include "./components/footer.html.twig" %}{# {% include mettre le lien pour inclure le footer %} #}
+		{# script bootstrap #}<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.m
+			in.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"> </script>
+		{# script jsquery #}
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+		{# Js perso import grace à js #}
+		<script src="{{ asset('assets/js/app.js') }}"></script>
+	</body>
 </html>

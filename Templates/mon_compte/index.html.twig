@@ -17,59 +17,63 @@
 		}
 	</style>
 
-	<div class='container'></div>
-	<div class="example-wrapper">
-		<h1>Mon compte</h1>
-		{# {{ dump(app.user) }} #}
+	<div class='container'>
+		<div class='row'>
+			<div class='col-4'>
 
-		<p>
-			{{ app.user.nom }}
-		</p>
-		<p>
-			{{ app.user.prenom }}
-		</p>
-		<p>
-			{{ app.user.adresse }}
-		</p>
-		<p>
-			{{ app.user.codePostal }}
-		</p>
-		<p>
-			{{ app.user.ville }}
-		</p>
-		<p>
-			{{ app.user.email }}
-		</p>
-		<p>
-			{{ app.user.telephone }}
-		</p>
-		<p>
-			{{ app.user.photo }}
-		</p>
+				<h1>Mon compte</h1>
+				{# {{ dump(app.user) }} #}
 
-		<a href="{{ path('app_modification_mon_compte', {'id': app.user.id }) }}">
-			<button type="submit" class="btn btn-dark text-light mt-2 btn-hover">
-				Modifier</button>
-		</a>
-	</div>
-	{% for photo in tryon %}
-		<div class="card-body-photo">
-			<img src="{{ asset(photo.photo) }}" alt="">
-            <p>
-			{{ photo.commentaire }}
-			</p>
-            <a href="{{ path('app_modification_try_on', {'id': photo.id }) }}">
-			<button type="submit" class="btn btn-dark text-light mt-2 btn-hover">
-            <i class="fa-solid fa-pen" aria-hidden="true"></i>
-				Modifier</button>
+				<p>
+					{{ app.user.nom }}
+				</p>
+				<p>
+					{{ app.user.prenom }}
+				</p>
+				<p>
+					{{ app.user.adresse }}
+				</p>
+				<p>
+					{{ app.user.codePostal }}
+				</p>
+				<p>
+					{{ app.user.ville }}
+				</p>
+				<p>
+					{{ app.user.email }}
+				</p>
+				<p>
+					{{ app.user.telephone }}
+				</p>
+				<p>
+					{{ app.user.photo }}
+				</p>
 
-            <a href="{{ path('app_supprime_try_on', {'id': photo.id }) }}?token={{ csrf_token('suppression') }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer la photo?')">
-									<button type="submit" class="btn btn-danger mt-2">
-										<i class="fa-solid fa-trash" aria-hidden="true"></i>
-										Supprimer
-									</button>
-								</a>
-		    {% endfor %}
-        </div>
+				<a href="{{ path('app_modification_mon_compte', {'id': app.user.id }) }}">
+					<button type="submit" class="btn btn-dark text-light mt-2 btn-hover">
+						Modifier</button>
+				</a>
+			</div>
+			<div class='col-8'>
+				{% for photo in tryon %}
+					<img src="{{ asset(photo.photo) }}" alt="">
+					<p>
+						{{ photo.commentaire }}
+					</p>
+					<a href="{{ path('app_modification_try_on', {'id': photo.id }) }}">
+						<button type="submit" class="btn btn-dark text-light mt-2 btn-hover">
+							<i class="fa-solid fa-pen" aria-hidden="true"></i>
+							Modifier</button>
+
+						<a href="{{ path('app_supprime_try_on', {'id': photo.id }) }}?token={{ csrf_token('suppression') }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer la photo?')">
+							<button type="submit" class="btn btn-danger mt-2">
+								<i class="fa-solid fa-trash" aria-hidden="true"></i>
+								Supprimer
+							</button>
+						</a>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
 	</div>
 {% endblock %}
