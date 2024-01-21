@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Essai virtuel{% endblock %}
 
@@ -11,4 +11,90 @@
 <!-- This brings in the ability to load custom 3D objects in the .gltf file format. Blender allows the ability to export to this format out the box -->
 <script src='https://cdn.jsdelivr.net/gh/mrdoob/Three.js@r92/examples/js/loaders/GLTFLoader.js'></script>
 
+{% endblock %} #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Mode{% endblock %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Essayage Virtuel</title>
+    <style>
+    body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.mannequin {
+    position: relative;
+    width: 300px;
+    height: 500px;
+    background: url('https://media.istockphoto.com/id/182137787/fr/photo/blanc-vue-de-face-de-lanatomie-silhouette.jpg?s=1024x1024&w=is&k=20&c=nEOUlZ0g9hBnFUPpdh4ebNT9T7uZZr-mat1HiBQCvy4=') center/cover no-repeat;
+}
+
+.vetement {
+    position: absolute;
+    top: 73px;
+    left: 72px;
+    width: 52%;
+    height: 40%;
+    object-fit: cover;
+    display: none;
+}
+
+.pantalonEss {
+    position: absolute;
+    top: 149px;
+    left: 95px;
+    width: 44%;
+    height: 82%;
+    object-fit: cover;
+    display: none;
+}
+
+.selections {
+    margin-top: 20px;
+}
+
+button {
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
+}
+    </style>
+</head>
+<body>
+    <div class="mannequin" id="mannequin">
+        <img src="/assets/img/photos/t-shirt-1976334_640.png" alt="Chemise" class="vetement" id="chemise-img">
+        <img src="/assets/img/photos/Design_sans_titre_1.png" alt="Pantalon" class="pantalonEss" id="pantalon-img">
+        <img src="chaussures.jpg" alt="Chaussures" class="vetement" id="chaussures-img">
+    </div>
+    <div class="selections">
+        <button onclick="changerVetement('chemise-img')">Changer Chemise</button>
+        <button onclick="changerVetement('pantalon-img')">Changer Pantalon</button>
+        <button onclick="changerVetement('chaussures-img')">Changer Chaussures</button>
+    </div>
+    <script>
+function changerVetement(id) {
+    var vetementImg = document.getElementById(id);
+    vetementImg.style.display = 'block';
+
+    // Cacher les autres vêtements
+    var tousLesVetements = document.querySelectorAll('.vetement');
+    tousLesVetements.forEach(function(element) {
+        if (element.id !== id) {
+            element.style.display = 'none';
+        }
+    });
+}
+    </script>
+</body>
+</html>
 {% endblock %}

@@ -19,4 +19,45 @@ p {
 .cintre {
     width: 10% !important;
 }
+.photo-cover {
+    
+    width: 100%;
+    background-image: url(/public/assets/img/photos/femme-fourure-comp.png);
+    background-color: #58585af4;
+    height: 500px;
+    background-position: right -5% center;
+    background-repeat: no-repeat;
+    margin-bottom: 50px;
+
+}
+.home-description {
+    color: white;
+    padding: 60px;
+}
+
+@media (max-width: 768px) {
+    .photo-cover {
+    
+        width: 100%;
+        background-image: url(/public/assets/img/photos/femme-fourure-comp.png);
+        background-color: #58585af4;
+        height: 500px;
+        background-position: right 50% center;
+        background-repeat: no-repeat;
+        margin-bottom: 50px;
+    }
+     .home-description {
+            color: rgb(238, 238, 205);
+            padding: 40px;
+            font-size: 18px;
+    
+        }
+    
+}
+.home-photo {
+    width: 100%;
+}
+.text-dark {
+    font-size: 18px;
+}
 

@@ -5,34 +5,52 @@
 
 {% block body %}
 
+	{% if app.user %}
+		<div class="mb-3 text-center">
+			Vous êtes connecté en tant que
+			{{ app.user.pseudo }},
+		</div>
+	{% endif %}
 	<div class="container">
 		<h1>ModeTry 'Vos vêtement, Votre silouhette, Votre style'
 			{{ controller_name }}
 		</h1>
-		<h2 class='h4'>
-			L'essayage virtuel de chez vous
-		</h2>
-		<h4>
-			<p>
-				Essayage Virtuel Révolutionnaire avec ModeTry <br>
-				Découvrez une expérience d'achat en ligne inédite avec ModeTry, le leader de l'essayage virtuel. Plongez dans un univers où la technologie rencontre la mode pour redéfinir votre style, votre silhouette, votre mode de consommation.
-			</p>
-			<p>
-				Chez ModeTry, nous croyons que choisir ses vêtements en ligne devrait être aussi engageant et personnel que dans une boutique physique. Notre plateforme novatrice offre une immersion totale dans l'univers de la mode, grâce à une technologie d'essayage virtuel qui transcende les simples images sur un écran.
-			</p>
-		</h4>
+	</div>
+	<div class="container-fluid photo-cover">
+		<div class="row ">
+			<div class="col-md-5 home-description">
+				<h2 class='h4'>
+					L'essayage virtuel de chez vous
+				</h2>
+
+				<p>
+					Essayage Virtuel Révolutionnaire avec ModeTry
+					<br>
+					Découvrez une expérience d'achat en ligne inédite avec ModeTry, le leader de l'essayage virtuel.
+					<br>
+					Plongez dans un univers où la technologie rencontre la mode pour redéfinir votre style, votre silhouette, votre mode de consommation.
+				</p>
+
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-8 col-sm-12 mb-5">
+				<p class="text-dark">
+					Explorez les dernières tendances de la mode, des tenues décontractées aux looks formels, et essayez-les virtuellement pour découvrir votre style unique. Chaque clic sur ModeTry est une invitation à explorer, expérimenter et adopter votre propre histoire de la mode.
+				</p>
+			</div>
+		</div>
+
 		<div class="row">
-			<div class="col">
-				<img src="{{ asset('assets/img/photos/page.webp') }}" class="page" alt="modèle de tunique en soie noir à fleur porté par femme">
+			<div class="col-sm-12 col-md-6 mb-5">
+				<img src="{{ asset('assets/img/photos/page.webp') }}" class="page home-photo mb-5" alt="modèle de tunique en soie noir à fleur porté par femme">
+				<img src="{{ asset('assets/img/photos/bascket.webp') }}" class="jean home-photo" alt="basquette mixte blanche basse à lacet en cuire et daim tres confortable">
 			</div>
-			<div class="col">
-				<img src="{{ asset('assets/img/photos/men.webp') }}" class="men" alt="veste longue en laine couleur noir ou gris pour homme">
-			</div>
-			<div class="col mt-5">
-				<img src="{{ asset('assets/img/photos/bascket.webp') }}" class="jean" alt="basquette mixte blanche basse à lacet en cuire et daim tres confortable">
-			</div>
-			<div class="col mt-5">
-				<img src="{{ asset('assets/img/photos/escarpin noir.webp') }}" class="jean" alt="escarpin en cuir noir talon de 10cm très élégant et confortable">
+			<div class="col-sm-12 col-md-6">
+				<img src="{{ asset('assets/img/photos/men.webp') }}" class="men home-photo mb-5" alt="veste longue en laine couleur noir ou gris pour homme">
+				<img src="{{ asset('assets/img/photos/escarpin noir.webp') }}" class="jean home-photo" alt="escarpin en cuir noir talon de 10cm très élégant et confortable">
 			</div>
 		</div>
 	</div>

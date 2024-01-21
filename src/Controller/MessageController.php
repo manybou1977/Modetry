@@ -76,7 +76,7 @@ class MessageController extends AbstractController
             $this->manager->flush();
         }
 
-        return $this->redirectToRoute('message_conversation', ['id' => $receiver->getId()]);
+        return $this->redirectToRoute('message_list');
     }
 }
 
